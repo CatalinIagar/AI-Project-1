@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "1c4c77ff-6ccb-496f-b0fb-8ea1b589330a": {
+      "ProjectGuid": "1c4c77ff-6ccb-496f-b0fb-8ea1b589330a",
+      "DisplayName": "AI Project 1",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

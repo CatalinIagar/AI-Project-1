@@ -1,0 +1,11 @@
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\bin\Debug\AI Project 1.exe.config
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\bin\Debug\AI Project 1.exe
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\bin\Debug\AI Project 1.pdb
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI Project 1.csproj.AssemblyReference.cache
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI Project 1.csproj.SuggestedBindingRedirects.cache
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI_Project_1.Properties.Resources.resources
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI Project 1.csproj.GenerateResource.cache
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI Project 1.csproj.CoreCompileInputs.cache
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI Project 1.exe
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI Project 1.pdb
+C:\Faculta\Ai\Project 1\AI Project 1\AI Project 1\obj\Debug\AI_Project_1.Form1.resources
