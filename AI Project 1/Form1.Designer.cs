@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lblInput = new System.Windows.Forms.Label();
             this.valueInput = new System.Windows.Forms.NumericUpDown();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -57,6 +58,7 @@
             this.lblOut = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnBinar = new System.Windows.Forms.CheckBox();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.valueInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.InputRadioPanel.SuspendLayout();
@@ -102,12 +104,13 @@
             this.lblGInput.AutoSize = true;
             this.lblGInput.Location = new System.Drawing.Point(238, 19);
             this.lblGInput.Name = "lblGInput";
-            this.lblGInput.Size = new System.Drawing.Size(30, 13);
+            this.lblGInput.Size = new System.Drawing.Size(34, 13);
             this.lblGInput.TabIndex = 4;
-            this.lblGInput.Text = "GIn: ";
+            this.lblGInput.Text = "Input:";
             // 
             // txtInput
             // 
+            this.txtInput.Enabled = false;
             this.txtInput.Location = new System.Drawing.Point(274, 16);
             this.txtInput.Name = "txtInput";
             this.txtInput.ReadOnly = true;
@@ -123,7 +126,7 @@
             this.InputRadioPanel.Controls.Add(this.btnSuma);
             this.InputRadioPanel.Location = new System.Drawing.Point(274, 58);
             this.InputRadioPanel.Name = "InputRadioPanel";
-            this.InputRadioPanel.Size = new System.Drawing.Size(100, 130);
+            this.InputRadioPanel.Size = new System.Drawing.Size(100, 95);
             this.InputRadioPanel.TabIndex = 6;
             this.InputRadioPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.InputRadioPanel_Paint);
             // 
@@ -134,7 +137,6 @@
             this.btnMaxim.Name = "btnMaxim";
             this.btnMaxim.Size = new System.Drawing.Size(55, 17);
             this.btnMaxim.TabIndex = 3;
-            this.btnMaxim.TabStop = true;
             this.btnMaxim.Text = "Maxim";
             this.btnMaxim.UseVisualStyleBackColor = true;
             this.btnMaxim.CheckedChanged += new System.EventHandler(this.btnMaxim_CheckedChanged);
@@ -146,7 +148,6 @@
             this.btnMin.Name = "btnMin";
             this.btnMin.Size = new System.Drawing.Size(52, 17);
             this.btnMin.TabIndex = 2;
-            this.btnMin.TabStop = true;
             this.btnMin.Text = "Minim";
             this.btnMin.UseVisualStyleBackColor = true;
             this.btnMin.CheckedChanged += new System.EventHandler(this.btnMin_CheckedChanged);
@@ -158,7 +159,6 @@
             this.btnProdus.Name = "btnProdus";
             this.btnProdus.Size = new System.Drawing.Size(58, 17);
             this.btnProdus.TabIndex = 1;
-            this.btnProdus.TabStop = true;
             this.btnProdus.Text = "Produs";
             this.btnProdus.UseVisualStyleBackColor = true;
             this.btnProdus.CheckedChanged += new System.EventHandler(this.btnProdus_CheckedChanged);
@@ -166,10 +166,12 @@
             // btnSuma
             // 
             this.btnSuma.AutoSize = true;
+            this.btnSuma.Checked = true;
             this.btnSuma.Location = new System.Drawing.Point(3, 3);
             this.btnSuma.Name = "btnSuma";
             this.btnSuma.Size = new System.Drawing.Size(52, 17);
             this.btnSuma.TabIndex = 0;
+            this.btnSuma.TabStop = true;
             this.btnSuma.Text = "Suma";
             this.btnSuma.UseVisualStyleBackColor = true;
             this.btnSuma.CheckedChanged += new System.EventHandler(this.btnSuma_CheckedChanged);
@@ -199,7 +201,6 @@
             this.btnLiniara.Name = "btnLiniara";
             this.btnLiniara.Size = new System.Drawing.Size(56, 17);
             this.btnLiniara.TabIndex = 4;
-            this.btnLiniara.TabStop = true;
             this.btnLiniara.Text = "Liniara";
             this.btnLiniara.UseVisualStyleBackColor = true;
             this.btnLiniara.CheckedChanged += new System.EventHandler(this.btnLiniara_CheckedChanged);
@@ -211,7 +212,6 @@
             this.btnTanh.Name = "btnTanh";
             this.btnTanh.Size = new System.Drawing.Size(74, 17);
             this.btnTanh.TabIndex = 3;
-            this.btnTanh.TabStop = true;
             this.btnTanh.Text = "Tangenta ";
             this.btnTanh.UseVisualStyleBackColor = true;
             this.btnTanh.CheckedChanged += new System.EventHandler(this.btnTanh_CheckedChanged);
@@ -223,7 +223,6 @@
             this.btnSigm.Name = "btnSigm";
             this.btnSigm.Size = new System.Drawing.Size(76, 17);
             this.btnSigm.TabIndex = 2;
-            this.btnSigm.TabStop = true;
             this.btnSigm.Text = "Sigmoidala";
             this.btnSigm.UseVisualStyleBackColor = true;
             this.btnSigm.CheckedChanged += new System.EventHandler(this.btnSigm_CheckedChanged);
@@ -254,7 +253,6 @@
             this.btnSemn.Name = "btnSemn";
             this.btnSemn.Size = new System.Drawing.Size(52, 17);
             this.btnSemn.TabIndex = 1;
-            this.btnSemn.TabStop = true;
             this.btnSemn.Text = "Semn";
             this.btnSemn.UseVisualStyleBackColor = true;
             this.btnSemn.CheckedChanged += new System.EventHandler(this.btnSemn_CheckedChanged);
@@ -276,10 +274,12 @@
             // btnTreapta
             // 
             this.btnTreapta.AutoSize = true;
+            this.btnTreapta.Checked = true;
             this.btnTreapta.Location = new System.Drawing.Point(6, 3);
             this.btnTreapta.Name = "btnTreapta";
             this.btnTreapta.Size = new System.Drawing.Size(62, 17);
             this.btnTreapta.TabIndex = 0;
+            this.btnTreapta.TabStop = true;
             this.btnTreapta.Text = "Treapta";
             this.btnTreapta.UseVisualStyleBackColor = true;
             this.btnTreapta.CheckedChanged += new System.EventHandler(this.btnTreapta_CheckedChanged);
@@ -306,6 +306,7 @@
             // 
             // txtActivare
             // 
+            this.txtActivare.Enabled = false;
             this.txtActivare.Location = new System.Drawing.Point(454, 16);
             this.txtActivare.Name = "txtActivare";
             this.txtActivare.ReadOnly = true;
@@ -323,6 +324,7 @@
             // 
             // txtOut
             // 
+            this.txtOut.Enabled = false;
             this.txtOut.Location = new System.Drawing.Point(628, 16);
             this.txtOut.Name = "txtOut";
             this.txtOut.ReadOnly = true;
@@ -334,9 +336,9 @@
             this.lblOut.AutoSize = true;
             this.lblOut.Location = new System.Drawing.Point(573, 19);
             this.lblOut.Name = "lblOut";
-            this.lblOut.Size = new System.Drawing.Size(49, 13);
+            this.lblOut.Size = new System.Drawing.Size(42, 13);
             this.lblOut.TabIndex = 16;
-            this.lblOut.Text = "Activare:";
+            this.lblOut.Text = "Output:";
             // 
             // panel2
             // 
@@ -344,7 +346,7 @@
             this.panel2.Controls.Add(this.btnBinar);
             this.panel2.Location = new System.Drawing.Point(628, 58);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(100, 130);
+            this.panel2.Size = new System.Drawing.Size(100, 24);
             this.panel2.TabIndex = 18;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -375,8 +377,9 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.valueInput);
             this.Controls.Add(this.lblInput);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "AI Project 1";
+            this.Text = "Project 1";
             ((System.ComponentModel.ISupportInitialize)(this.valueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.InputRadioPanel.ResumeLayout(false);
@@ -421,6 +424,7 @@
         private System.Windows.Forms.Label lblOut;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox btnBinar;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
 }
 

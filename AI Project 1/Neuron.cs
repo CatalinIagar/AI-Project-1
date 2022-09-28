@@ -9,8 +9,6 @@ namespace AI_Project_1
     public class Neuron
     {
         public int nOfInputs;
-        //public List<float> x;
-        //public List<float> w;
         public double[] x;
         public double[] w;
         public double g;
@@ -28,7 +26,6 @@ namespace AI_Project_1
             activation = 0;
             output = 0;
         }
-
 
     }
 }

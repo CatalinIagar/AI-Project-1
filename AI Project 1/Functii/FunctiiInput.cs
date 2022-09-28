@@ -20,12 +20,19 @@ namespace AI_Project_1.Functii
 
         static public double calculInputprodus(Neuron neuron)
         {
-            double prod = 0f;
-            if (neuron.x != null) prod = neuron.x[0] * neuron.w[0];
-            for (int i = 1; i < neuron.nOfInputs; i++)
+            double prod = 0.0;
+
+            if (neuron.nOfInputs == 0) return 0.0;
+
+            if (neuron.nOfInputs >= 1) prod = neuron.x[0] * neuron.w[0];
+            if(neuron.nOfInputs > 1)
             {
-                prod *= neuron.x[i] * neuron.w[i];
+                for (int i = 1; i < neuron.nOfInputs; i++)
+                {
+                    prod *= neuron.x[i] * neuron.w[i];
+                }
             }
+            
             return prod;
         }
 

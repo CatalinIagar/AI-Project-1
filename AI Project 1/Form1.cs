@@ -18,8 +18,6 @@ namespace AI_Project_1
         List<NumericUpDown> inputsW = new List<NumericUpDown>();
         List<Label> labelsX = new List<Label>();
         List<Label> labelsW = new List<Label>();
-        decimal value = 0.01m;
-        decimal value2 = 0.1m;
 
         Neuron neuron = new Neuron();
         public Form1()
@@ -28,19 +26,21 @@ namespace AI_Project_1
 
             this.BackColor = Color.LightGray;
 
+            flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
+
             tetaInput.DecimalPlaces = 2;
-            tetaInput.Increment = value2;
+            tetaInput.Increment = 0.1M;
             gInput.DecimalPlaces = 2;
-            gInput.Increment = value2;
+            gInput.Increment = 0.1M;
             updateInfo();
         }
 
         private void updateInfo()
         {
-            if (btnSuma.Checked) neuron.ginput = FunctiiInput.calculInputSuma(neuron);
-            if (btnProdus.Checked) neuron.ginput = FunctiiInput.calculInputprodus(neuron);
-            if (btnMin.Checked) neuron.ginput = FunctiiInput.calculInputMinim(neuron);
-            if (btnMaxim.Checked) neuron.ginput = FunctiiInput.calculInputMaxim(neuron);
+            if (btnSuma.Checked) neuron.ginput = FunctiiInput.calculInputSuma(neuron) - neuron.teta;
+            if (btnProdus.Checked) neuron.ginput = FunctiiInput.calculInputprodus(neuron) - neuron.teta;
+            if (btnMin.Checked) neuron.ginput = FunctiiInput.calculInputMinim(neuron) - neuron.teta;
+            if (btnMaxim.Checked) neuron.ginput = FunctiiInput.calculInputMaxim(neuron) - neuron.teta;
 
             if (btnTreapta.Checked) neuron.activation = FunctiiActivare.calculActivareTreapta(neuron);
             if (btnSemn.Checked) neuron.activation = FunctiiActivare.calculActivareSemn(neuron);
@@ -76,81 +76,92 @@ namespace AI_Project_1
             int newNOfInputs = Convert.ToInt32(valueInput.Value);
             if (newNOfInputs > nOfInputs)
             {
-                nOfInputs = newNOfInputs;
-                neuron.nOfInputs = nOfInputs;
-                
-                Label labelX = new Label();
-                labelX.Text = "X" + nOfInputs;
-                labelX.Size = new System.Drawing.Size(30, 30);
-                labelX.Margin = new Padding(5, 5, 0, 5);
-                NumericUpDown numericUpDownX = new NumericUpDown();
-                numericUpDownX.ValueChanged += new EventHandler(valueChanged);
-                numericUpDownX.Name = "inputX" + nOfInputs.ToString();
-                numericUpDownX.Size = new System.Drawing.Size(50, 30);
-                numericUpDownX.Maximum = 100;
-                numericUpDownX.Minimum = -100;
-                numericUpDownX.DecimalPlaces = 2;
-                numericUpDownX.Increment = value;
-                Array.Resize(ref neuron.x, nOfInputs);
-                neuron.x[nOfInputs - 1] = 0f;
-                
-                Label labelW = new Label();
-                labelW.Text = "W" + nOfInputs;
-                labelW.Size = new System.Drawing.Size(30, 30);
-                labelW.Margin = new Padding(5, 5, 0, 5);
-                NumericUpDown numericUpDownW = new NumericUpDown();
-                numericUpDownW.ValueChanged += new EventHandler(valueChanged);
-                numericUpDownW.Name = "inputW" + nOfInputs.ToString();
-                numericUpDownW.Size = new System.Drawing.Size(50, 30);
-                numericUpDownW.Maximum = 100;
-                numericUpDownW.Minimum = -100;
-                numericUpDownW.DecimalPlaces = 2;
-                numericUpDownW.Increment = value;
-                Array.Resize(ref neuron.w, nOfInputs);
-                neuron.w[nOfInputs - 1] = 1f;
-
-                labelsX.Add(labelX);
-                inputsX.Add(numericUpDownX);
-                labelsW.Add(labelW);
-                inputsW.Add(numericUpDownW);
-                flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
-                flowLayoutPanel1.Controls.Add(labelX);
-                flowLayoutPanel1.Controls.Add(numericUpDownX);
-                flowLayoutPanel1.Controls.Add(labelW);
-                flowLayoutPanel1.Controls.Add(numericUpDownW);
+                addNewInput(newNOfInputs);
             }
 
             if (newNOfInputs < nOfInputs)
             {
-                flowLayoutPanel1.Controls.Remove(inputsX[nOfInputs - 1]);
-                flowLayoutPanel1.Controls.Remove(inputsW[nOfInputs - 1]);
-                flowLayoutPanel1.Controls.Remove(labelsX[nOfInputs - 1]);
-                flowLayoutPanel1.Controls.Remove(labelsW[nOfInputs - 1]);
-                inputsX.RemoveAt(nOfInputs - 1);
-                inputsW.RemoveAt(nOfInputs - 1);
-                labelsX.RemoveAt(nOfInputs - 1);
-                labelsW.RemoveAt(nOfInputs - 1);
-                nOfInputs = newNOfInputs;
+                deleteLastInput(newNOfInputs);
             }
         }
 
-        private void valueChanged(object sender, EventArgs e)
+        private void addNewInput(int newNOfInputs)
+        {
+            nOfInputs = newNOfInputs;
+            neuron.nOfInputs++;
+
+            Label labelX = new Label();
+            labelX.Text = "X" + nOfInputs.ToString();
+            labelX.Size = new System.Drawing.Size(30, 30);
+            labelX.Margin = new Padding(5, 5, 0, 5);
+            NumericUpDown numericUpDownX = new NumericUpDown();
+            numericUpDownX.ValueChanged += new EventHandler(inputValueChanged);
+            numericUpDownX.Name = nOfInputs.ToString();
+            numericUpDownX.Size = new System.Drawing.Size(50, 30);
+            numericUpDownX.Maximum = 1000;
+            numericUpDownX.Minimum = -1000;
+            numericUpDownX.DecimalPlaces = 2;
+            numericUpDownX.Increment = 0.01M;
+            Array.Resize(ref neuron.x, nOfInputs);
+            neuron.x[nOfInputs - 1] = 0f;
+
+            Label labelW = new Label();
+            labelW.Text = "W" + nOfInputs.ToString();
+            labelW.Size = new System.Drawing.Size(30, 30);
+            labelW.Margin = new Padding(5, 5, 0, 5);
+            NumericUpDown numericUpDownW = new NumericUpDown();
+            numericUpDownW.ValueChanged += new EventHandler(wValueChanged);
+            numericUpDownW.Name = nOfInputs.ToString();
+            numericUpDownW.Size = new System.Drawing.Size(50, 30);
+            numericUpDownW.Maximum = 1000;
+            numericUpDownW.Minimum = -1000;
+            numericUpDownW.DecimalPlaces = 2;
+            numericUpDownW.Increment = 0.01M;
+            Array.Resize(ref neuron.w, nOfInputs);
+            neuron.w[nOfInputs - 1] = 0f;
+
+            labelsX.Add(labelX);
+            inputsX.Add(numericUpDownX);
+            labelsW.Add(labelW);
+            inputsW.Add(numericUpDownW);
+            flowLayoutPanel1.Controls.Add(labelX);
+            flowLayoutPanel1.Controls.Add(numericUpDownX);
+            flowLayoutPanel1.Controls.Add(labelW);
+            flowLayoutPanel1.Controls.Add(numericUpDownW);
+            updateInfo();
+        }
+
+        private void deleteLastInput(int newNOfInputs)
+        {
+            flowLayoutPanel1.Controls.Remove(inputsX[nOfInputs - 1]);
+            flowLayoutPanel1.Controls.Remove(inputsW[nOfInputs - 1]);
+            flowLayoutPanel1.Controls.Remove(labelsX[nOfInputs - 1]);
+            flowLayoutPanel1.Controls.Remove(labelsW[nOfInputs - 1]);
+            inputsX.RemoveAt(nOfInputs - 1);
+            inputsW.RemoveAt(nOfInputs - 1);
+            labelsX.RemoveAt(nOfInputs - 1);
+            labelsW.RemoveAt(nOfInputs - 1);
+            Array.Resize(ref neuron.x, newNOfInputs);
+            Array.Resize(ref neuron.w, newNOfInputs);
+            neuron.nOfInputs = nOfInputs - 1;
+            nOfInputs = newNOfInputs;
+            updateInfo();
+        }
+
+        private void inputValueChanged(object sender, EventArgs e)
         {
             NumericUpDown numeric = (NumericUpDown)sender;
-            for(int i = 1; i <= nOfInputs; i++)
-            {
-                if(numeric.Name == "inputX" + i)
-                {
-                    neuron.x[i - 1] = (float)numeric.Value;
-                    
-                    updateInfo();
-                }
-                if (numeric.Name == "inputW" + i)
-                {
-                    neuron.w[i - 1] = (float)numeric.Value;
-                    updateInfo();
-                }
-            }
+            int pos = Convert.ToInt32(numeric.Name) - 1;
+            neuron.x[pos] = (double)numeric.Value;
+            updateInfo();
+        }
+
+        private void wValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numeric = (NumericUpDown)sender;
+            int pos = Convert.ToInt32(numeric.Name) - 1;
+            neuron.w[pos] = (double)numeric.Value;
+            updateInfo();
         }
 
         private void btnSuma_CheckedChanged(object sender, EventArgs e)
@@ -215,18 +226,6 @@ namespace AI_Project_1
             tetaInput.Enabled = true;
             lblG.Enabled = true;
             gInput.Enabled = true;
-            updateInfo();
-        }
-
-        private void tetaInput_TextChanged(object sender, EventArgs e)
-        {
-            neuron.teta = Convert.ToDouble(tetaInput.Value);
-            updateInfo();
-        }
-
-        private void gInput_TextChanged(object sender, EventArgs e)
-        {
-            neuron.teta = Convert.ToDouble(gInput.Value);
             updateInfo();
         }
 
