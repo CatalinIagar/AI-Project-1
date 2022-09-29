@@ -10,13 +10,13 @@ namespace AI_Project_1.Functii
     {
         static public double calculActivareTreapta(Neuron neuron)
         {
-            if (neuron.ginput >= 0) return 1;
+            if (neuron.ginput >= neuron.teta) return 1;
             return 0;
         }
 
         static public double calculActivareSemn(Neuron neuron)
         {
-            if (neuron.ginput >= 0) return 1;
+            if (neuron.ginput >= neuron.teta) return 1;
             return -1;
         }
 
@@ -36,9 +36,9 @@ namespace AI_Project_1.Functii
 
         static public double calculActivareLiniara(Neuron neuron)
         {
-            if (neuron.ginput < -1/neuron.g) return -1;
-            if (neuron.ginput > 1/neuron.g) return 1;
-            return neuron.ginput * neuron.g;
+            if (neuron.ginput - neuron.teta < -1/neuron.g) return -1;
+            if (neuron.ginput - neuron.teta > 1/neuron.g) return 1;
+            return (neuron.ginput - neuron.teta) * neuron.g;
         }
     }
 }

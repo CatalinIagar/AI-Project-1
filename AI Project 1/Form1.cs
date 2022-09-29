@@ -24,23 +24,32 @@ namespace AI_Project_1
         {
             InitializeComponent();
 
-            this.BackColor = Color.LightGray;
 
-            flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
+            nOfInputs++;
+            addNewInput(nOfInputs);
+            valueInput.Value = nOfInputs;
 
-            tetaInput.DecimalPlaces = 2;
-            tetaInput.Increment = 0.1M;
-            gInput.DecimalPlaces = 2;
-            gInput.Increment = 0.1M;
+            btnSuma.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, false);
+            btnProdus.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, false);
+            btnMin.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, false);
+            btnMaxim.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, false);
+
+            btnTreapta.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, false);
+            btnSemn.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, false);
+            btnSigm.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, true);
+            btnTanh.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, true);
+            btnLiniara.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, true);
+
+            btnBinar.CheckedChanged += (sender, e) => btnCheckedChanged(sender, e, true);
+
             updateInfo();
         }
-
         private void updateInfo()
         {
-            if (btnSuma.Checked) neuron.ginput = FunctiiInput.calculInputSuma(neuron) - neuron.teta;
-            if (btnProdus.Checked) neuron.ginput = FunctiiInput.calculInputprodus(neuron) - neuron.teta;
-            if (btnMin.Checked) neuron.ginput = FunctiiInput.calculInputMinim(neuron) - neuron.teta;
-            if (btnMaxim.Checked) neuron.ginput = FunctiiInput.calculInputMaxim(neuron) - neuron.teta;
+            if (btnSuma.Checked) neuron.ginput = FunctiiInput.calculInputSuma(neuron);  
+            if (btnProdus.Checked) neuron.ginput = FunctiiInput.calculInputprodus(neuron);
+            if (btnMin.Checked) neuron.ginput = FunctiiInput.calculInputMinim(neuron);
+            if (btnMaxim.Checked) neuron.ginput = FunctiiInput.calculInputMaxim(neuron);
 
             if (btnTreapta.Checked) neuron.activation = FunctiiActivare.calculActivareTreapta(neuron);
             if (btnSemn.Checked) neuron.activation = FunctiiActivare.calculActivareSemn(neuron);
@@ -48,13 +57,13 @@ namespace AI_Project_1
             if (btnTanh.Checked) neuron.activation = FunctiiActivare.calculActivareTanh(neuron);
             if (btnLiniara.Checked) neuron.activation = FunctiiActivare.calculActivareLiniara(neuron);
 
-            neuron.output = calculOuput();
+            neuron.output = neuron.activation;
+            if (btnBinar.Checked) neuron.output = calculOuput();
 
             txtInput.Text = neuron.ginput.ToString();
             txtActivare.Text = neuron.activation.ToString();
             txtOut.Text = neuron.output.ToString();
         }
-
         private double calculOuput()
         {
             if (btnTreapta.Checked || btnSemn.Checked) return neuron.activation;
@@ -63,14 +72,13 @@ namespace AI_Project_1
                 if (neuron.activation >= 0.5) return 1;
                 return 0;
             }
-            if(btnTanh.Checked || btnLiniara.Checked)
+            if (btnTanh.Checked || btnLiniara.Checked)
             {
                 if(neuron.activation >= 0) return 1;
                 return -1;
             }
             return 0;
         }
-
         private void valueInput_ValueChanged(object sender, EventArgs e)
         {
             int newNOfInputs = Convert.ToInt32(valueInput.Value);
@@ -84,7 +92,6 @@ namespace AI_Project_1
                 deleteLastInput(newNOfInputs);
             }
         }
-
         private void addNewInput(int newNOfInputs)
         {
             nOfInputs = newNOfInputs;
@@ -95,7 +102,7 @@ namespace AI_Project_1
             labelX.Size = new System.Drawing.Size(30, 30);
             labelX.Margin = new Padding(5, 5, 0, 5);
             NumericUpDown numericUpDownX = new NumericUpDown();
-            numericUpDownX.ValueChanged += new EventHandler(inputValueChanged);
+            numericUpDownX.ValueChanged += (sender, e) => neuronValuesChanged(sender, e, "input");
             numericUpDownX.Name = nOfInputs.ToString();
             numericUpDownX.Size = new System.Drawing.Size(50, 30);
             numericUpDownX.Maximum = 1000;
@@ -110,7 +117,7 @@ namespace AI_Project_1
             labelW.Size = new System.Drawing.Size(30, 30);
             labelW.Margin = new Padding(5, 5, 0, 5);
             NumericUpDown numericUpDownW = new NumericUpDown();
-            numericUpDownW.ValueChanged += new EventHandler(wValueChanged);
+            numericUpDownW.ValueChanged += (sender, e) => neuronValuesChanged(sender, e, "weight");
             numericUpDownW.Name = nOfInputs.ToString();
             numericUpDownW.Size = new System.Drawing.Size(50, 30);
             numericUpDownW.Maximum = 1000;
@@ -130,7 +137,6 @@ namespace AI_Project_1
             flowLayoutPanel1.Controls.Add(numericUpDownW);
             updateInfo();
         }
-
         private void deleteLastInput(int newNOfInputs)
         {
             flowLayoutPanel1.Controls.Remove(inputsX[nOfInputs - 1]);
@@ -147,97 +153,31 @@ namespace AI_Project_1
             nOfInputs = newNOfInputs;
             updateInfo();
         }
-
-        private void inputValueChanged(object sender, EventArgs e)
+        private void neuronValuesChanged(object sender, EventArgs e, String v)
         {
             NumericUpDown numeric = (NumericUpDown)sender;
             int pos = Convert.ToInt32(numeric.Name) - 1;
-            neuron.x[pos] = (double)numeric.Value;
+            if (v == "input") neuron.x[pos] = (double)numeric.Value;
+            if (v == "weight") neuron.w[pos] = (double)numeric.Value;
             updateInfo();
         }
-
-        private void wValueChanged(object sender, EventArgs e)
-        {
-            NumericUpDown numeric = (NumericUpDown)sender;
-            int pos = Convert.ToInt32(numeric.Name) - 1;
-            neuron.w[pos] = (double)numeric.Value;
-            updateInfo();
-        }
-
-        private void btnSuma_CheckedChanged(object sender, EventArgs e)
+        private void btnCheckedChanged(object sender, EventArgs e, bool v)
         {
             updateInfo();
-        }
 
-        private void btnProdus_CheckedChanged(object sender, EventArgs e)
-        {
-            updateInfo();
-        }
+            if (v == true) {
+                lblG.Enabled = true;
+                gInput.Enabled = true;
+            }
 
-        private void btnMin_CheckedChanged(object sender, EventArgs e)
-        {
-            updateInfo();
+            if (v == false) {
+                lblG.Enabled = false;
+                gInput.Enabled = false;
+            }
         }
-
-        private void btnMaxim_CheckedChanged(object sender, EventArgs e)
-        {
-            updateInfo();
-        }
-
-        private void btnTreapta_CheckedChanged(object sender, EventArgs e)
-        {
-            lblTeta.Enabled = false;
-            tetaInput.Enabled = false;
-            lblG.Enabled = false;
-            gInput.Enabled = false;
-            updateInfo();
-        }
-
-        private void btnSemn_CheckedChanged(object sender, EventArgs e)
-        {
-            lblTeta.Enabled = false;
-            tetaInput.Enabled = false;
-            lblG.Enabled = false;
-            gInput.Enabled = false;
-            updateInfo();
-        }
-
-        private void btnSigm_CheckedChanged(object sender, EventArgs e)
-        {
-            lblTeta.Enabled = true;
-            tetaInput.Enabled = true;
-            lblG.Enabled = true;
-            gInput.Enabled = true;
-            updateInfo();
-        }
-
-        private void btnTanh_CheckedChanged(object sender, EventArgs e)
-        {
-            lblTeta.Enabled = true;
-            tetaInput.Enabled = true;
-            lblG.Enabled = true;
-            gInput.Enabled = true;
-            updateInfo();
-        }
-
-        private void btnLiniara_CheckedChanged(object sender, EventArgs e)
-        {
-            lblTeta.Enabled = true;
-            tetaInput.Enabled = true;
-            lblG.Enabled = true;
-            gInput.Enabled = true;
-            updateInfo();
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, this.flowLayoutPanel1.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
-        }
-
         private void InputRadioPanel_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, this.InputRadioPanel.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -249,7 +189,6 @@ namespace AI_Project_1
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, this.panel2.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
-
         }
 
         private void tetaInput_ValueChanged(object sender, EventArgs e)
@@ -263,5 +202,6 @@ namespace AI_Project_1
             neuron.g = (double)gInput.Value;
             updateInfo();
         }
+
     }
 }

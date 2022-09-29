@@ -85,10 +85,20 @@
             0,
             0,
             0});
+            this.valueInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.valueInput.Name = "valueInput";
             this.valueInput.ReadOnly = true;
             this.valueInput.Size = new System.Drawing.Size(50, 20);
             this.valueInput.TabIndex = 2;
+            this.valueInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.valueInput.ValueChanged += new System.EventHandler(this.valueInput_ValueChanged);
             // 
             // flowLayoutPanel1
@@ -97,6 +107,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 47);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 375);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // lblGInput
@@ -139,7 +150,6 @@
             this.btnMaxim.TabIndex = 3;
             this.btnMaxim.Text = "Maxim";
             this.btnMaxim.UseVisualStyleBackColor = true;
-            this.btnMaxim.CheckedChanged += new System.EventHandler(this.btnMaxim_CheckedChanged);
             // 
             // btnMin
             // 
@@ -150,7 +160,6 @@
             this.btnMin.TabIndex = 2;
             this.btnMin.Text = "Minim";
             this.btnMin.UseVisualStyleBackColor = true;
-            this.btnMin.CheckedChanged += new System.EventHandler(this.btnMin_CheckedChanged);
             // 
             // btnProdus
             // 
@@ -161,7 +170,6 @@
             this.btnProdus.TabIndex = 1;
             this.btnProdus.Text = "Produs";
             this.btnProdus.UseVisualStyleBackColor = true;
-            this.btnProdus.CheckedChanged += new System.EventHandler(this.btnProdus_CheckedChanged);
             // 
             // btnSuma
             // 
@@ -174,7 +182,6 @@
             this.btnSuma.TabStop = true;
             this.btnSuma.Text = "Suma";
             this.btnSuma.UseVisualStyleBackColor = true;
-            this.btnSuma.CheckedChanged += new System.EventHandler(this.btnSuma_CheckedChanged);
             // 
             // panel1
             // 
@@ -203,7 +210,6 @@
             this.btnLiniara.TabIndex = 4;
             this.btnLiniara.Text = "Liniara";
             this.btnLiniara.UseVisualStyleBackColor = true;
-            this.btnLiniara.CheckedChanged += new System.EventHandler(this.btnLiniara_CheckedChanged);
             // 
             // btnTanh
             // 
@@ -214,7 +220,6 @@
             this.btnTanh.TabIndex = 3;
             this.btnTanh.Text = "Tangenta ";
             this.btnTanh.UseVisualStyleBackColor = true;
-            this.btnTanh.CheckedChanged += new System.EventHandler(this.btnTanh_CheckedChanged);
             // 
             // btnSigm
             // 
@@ -225,16 +230,11 @@
             this.btnSigm.TabIndex = 2;
             this.btnSigm.Text = "Sigmoidala";
             this.btnSigm.UseVisualStyleBackColor = true;
-            this.btnSigm.CheckedChanged += new System.EventHandler(this.btnSigm_CheckedChanged);
             // 
             // tetaInput
             // 
-            this.tetaInput.Enabled = false;
-            this.tetaInput.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
+            this.tetaInput.DecimalPlaces = 2;
+            this.tetaInput.Increment = 0.1M;
             this.tetaInput.Location = new System.Drawing.Point(41, 154);
             this.tetaInput.Minimum = new decimal(new int[] {
             100,
@@ -255,20 +255,21 @@
             this.btnSemn.TabIndex = 1;
             this.btnSemn.Text = "Semn";
             this.btnSemn.UseVisualStyleBackColor = true;
-            this.btnSemn.CheckedChanged += new System.EventHandler(this.btnSemn_CheckedChanged);
             // 
             // gInput
             // 
             this.gInput.Enabled = false;
-            this.gInput.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
+            this.gInput.DecimalPlaces = 2;
+            this.gInput.Increment = 0.1M;
             this.gInput.Location = new System.Drawing.Point(41, 180);
             this.gInput.Name = "gInput";
             this.gInput.Size = new System.Drawing.Size(59, 20);
             this.gInput.TabIndex = 14;
+            this.gInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.gInput.ValueChanged += new System.EventHandler(this.gInput_ValueChanged);
             // 
             // btnTreapta
@@ -282,7 +283,6 @@
             this.btnTreapta.TabStop = true;
             this.btnTreapta.Text = "Treapta";
             this.btnTreapta.UseVisualStyleBackColor = true;
-            this.btnTreapta.CheckedChanged += new System.EventHandler(this.btnTreapta_CheckedChanged);
             // 
             // lblG
             // 
@@ -379,6 +379,7 @@
             this.Controls.Add(this.lblInput);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.BackColor = System.Drawing.Color.LightGray;
             this.Text = "Project 1";
             ((System.ComponentModel.ISupportInitialize)(this.valueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

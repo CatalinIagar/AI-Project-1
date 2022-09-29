@@ -20,7 +20,7 @@ namespace AI_Project_1
         public Neuron()
         {
             nOfInputs = 0;
-            g = 0;
+            g = 1;
             teta = 0;
             ginput = 0;
             activation = 0;
