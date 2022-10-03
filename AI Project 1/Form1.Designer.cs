@@ -107,7 +107,6 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 47);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 375);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // lblGInput
@@ -234,7 +233,11 @@
             // tetaInput
             // 
             this.tetaInput.DecimalPlaces = 2;
-            this.tetaInput.Increment = 0.1M;
+            this.tetaInput.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.tetaInput.Location = new System.Drawing.Point(41, 154);
             this.tetaInput.Minimum = new decimal(new int[] {
             100,
@@ -258,10 +261,19 @@
             // 
             // gInput
             // 
-            this.gInput.Enabled = false;
             this.gInput.DecimalPlaces = 2;
-            this.gInput.Increment = 0.1M;
+            this.gInput.Enabled = false;
+            this.gInput.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.gInput.Location = new System.Drawing.Point(41, 180);
+            this.gInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.gInput.Name = "gInput";
             this.gInput.Size = new System.Drawing.Size(59, 20);
             this.gInput.TabIndex = 14;
@@ -364,6 +376,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(747, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.txtOut);
@@ -379,7 +392,6 @@
             this.Controls.Add(this.lblInput);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.BackColor = System.Drawing.Color.LightGray;
             this.Text = "Project 1";
             ((System.ComponentModel.ISupportInitialize)(this.valueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AI_Project_1
+﻿namespace AI_Project_1
 {
     public class Neuron
     {

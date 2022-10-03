@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AI_Project_1.Functii;
 
@@ -23,7 +18,6 @@ namespace AI_Project_1
         public Form1()
         {
             InitializeComponent();
-
 
             nOfInputs++;
             addNewInput(nOfInputs);
@@ -164,12 +158,10 @@ namespace AI_Project_1
         private void btnCheckedChanged(object sender, EventArgs e, bool v)
         {
             updateInfo();
-
             if (v == true) {
                 lblG.Enabled = true;
                 gInput.Enabled = true;
             }
-
             if (v == false) {
                 lblG.Enabled = false;
                 gInput.Enabled = false;
@@ -179,29 +171,24 @@ namespace AI_Project_1
         {
             ControlPaint.DrawBorder(e.Graphics, this.InputRadioPanel.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
         }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
 
         }
-
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, this.panel2.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
         }
-
         private void tetaInput_ValueChanged(object sender, EventArgs e)
         {
             neuron.teta = (double)tetaInput.Value;
             updateInfo();
         }
-
         private void gInput_ValueChanged(object sender, EventArgs e)
         {
             neuron.g = (double)gInput.Value;
             updateInfo();
         }
-
     }
 }
